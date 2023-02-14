@@ -1,6 +1,7 @@
 package com.badas.springboot.web;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,8 +21,14 @@ public class UserRegistrationController {
 		this.userService = userService;
 	}
 	
+	@ModelAttribute("user")
+	public UserRegistrationDto userRegistrationDto() {
+		return new UserRegistrationDto();
+	}
+	
 	@GetMapping
-	public String showRegistrationForm() {
+	public String showRegistrationForm(Model model) {
+		model.addAttribute("user", new UserRegistrationDto());
 		return "registration";
 	}
 	
